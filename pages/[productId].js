@@ -63,40 +63,45 @@ const BeerDetail = ({ productId, ...props }) => {
   const { beers, error, loading } = useBeers([`ids=${productId}`]);
   return (
     <Container {...props}>
-      {beers.map(
-        ({
-          image_url,
-          name,
-          abv,
-          description,
-          brewers_tips,
-          food_pairing,
-          id,
-        }) => (
-          <ContentContainer key={`beers-${id}`}>
-            <ImageContainer>
-              <Image image={image_url} />
-            </ImageContainer>
-            <TextContainer>
-              <ContentItem>
-                <ContentTitle>{name}</ContentTitle>
-              </ContentItem>
-              <ContentItem>
-                <span style={{ fontWeight: "bold" }}>ABV: </span>
-                {`${abv}%`}
-              </ContentItem>
-              <ContentItem>{[description, brewers_tips].join(" ")}</ContentItem>
-              <ContentItem bold>Why Not Try With:</ContentItem>
-              <ContentItem>
-                {food_pairing.map((pairing, id) => (
-                  <div key={`food-pairing-${id}`}>{pairing}</div>
-                ))}
-              </ContentItem>
-            </TextContainer>
-          </ContentContainer>
-        )
-      )}
-      {/* {<div>{beers.legnth > 0 && beers[0].name}</div>} */}
+      {error && <div>{error}</div>}
+      {loading && <div>Loading</div>}
+      {!error &&
+        !loading &&
+        beers.map(
+          ({
+            image_url,
+            name,
+            abv,
+            description,
+            brewers_tips,
+            food_pairing,
+            id,
+          }) => (
+            <ContentContainer key={`beers-${id}`}>
+              <ImageContainer>
+                <Image image={image_url} />
+              </ImageContainer>
+              <TextContainer>
+                <ContentItem>
+                  <ContentTitle>{name}</ContentTitle>
+                </ContentItem>
+                <ContentItem>
+                  <span style={{ fontWeight: "bold" }}>ABV: </span>
+                  {`${abv}%`}
+                </ContentItem>
+                <ContentItem>
+                  {[description, brewers_tips].join(" ")}
+                </ContentItem>
+                <ContentItem bold>Why Not Try With:</ContentItem>
+                <ContentItem>
+                  {food_pairing.map((pairing, id) => (
+                    <div key={`food-pairing-${id}`}>{pairing}</div>
+                  ))}
+                </ContentItem>
+              </TextContainer>
+            </ContentContainer>
+          )
+        )}
     </Container>
   );
 };
