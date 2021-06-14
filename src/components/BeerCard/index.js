@@ -12,6 +12,7 @@ const CardContent = styled.div`
   border-radius: 5px;
   padding-left: 0px;
   cursor: pointer;
+  align-items: center;
 `;
 
 const ImageContainer = styled.div`
@@ -25,7 +26,7 @@ const Image = styled.div`
   background-image: ${({ image }) => `url(${image})`};
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
 `;
 
 const TextContainer = styled.div`

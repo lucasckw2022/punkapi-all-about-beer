@@ -15,6 +15,9 @@ const Container = styled.div`
 
 const StyledBeerCard = styled(BeerCard)`
   width: 50%;
+  > div {
+    height: 100%;
+  }
   @media (max-width: 480px) {
     width: 100%;
   }
