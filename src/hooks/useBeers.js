@@ -10,7 +10,12 @@ const useBeers = (params) => {
     try {
       (async () => {
         const beers = await axios.get(
-          `https://api.punkapi.com/v2/beers?${params && params.join("&")}`
+          `https://api.punkapi.com/v2/beers?${
+            params &&
+            Object.entries(params)
+              .map((param) => param.join("="))
+              .join("&")
+          }`
         );
         setBeers(beers.data);
         setLoading(false);
@@ -19,7 +24,8 @@ const useBeers = (params) => {
       console.log(err);
       setError(err);
     }
-  }, []);
+  }, [params]);
+
   return { beers, error, loading };
 };
 

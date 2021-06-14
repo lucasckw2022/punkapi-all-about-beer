@@ -23,9 +23,10 @@ const StyledBeerCard = styled(BeerCard)`
   }
 `;
 
-const BeerListing = (props) => {
-  const { beers, error, loading } = useBeers();
+const BeerListing = ({ filter }) => {
+  const { beers, error, loading } = useBeers(filter);
   const router = useRouter();
+
   return (
     <Container>
       {error && <div>{error}</div>}
@@ -34,8 +35,9 @@ const BeerListing = (props) => {
         !loading &&
         beers.map(({ name, tagline, image_url, id }) => (
           <StyledBeerCard
+            key={`beer-card-${id}`}
             {...{ name, tagline, image_url }}
-            onClick={() => router.push(`/${id}`, undefined, { shallow: true })}
+            onClick={() => router.push(`/${id}`)}
           />
         ))}
     </Container>
