@@ -1,10 +1,13 @@
-import styled from 'styled-components'
-
-const Title = styled.h1`
-  font-size: 50px;
-  color: ${({ theme }) => theme.colors.primary};
-`
+import { useState } from "react";
+import BeerListing from "../src/components/BeerListing";
+import Filter from "../src/components/Filter";
 
 export default function Home() {
-  return <Title>My page</Title>
+  const [filter, setFilter] = useState({});
+  return (
+    <>
+      <Filter {...{ setFilter, filter }} />
+      <BeerListing {...{ filter }} />
+    </>
+  );
 }
